@@ -417,8 +417,12 @@ public class gameNavigation {
 
     public static void location250() {
         System.out.println("You are on the far bank of the river, the path continues north.");
-        // Reward for guessing game, at this stage the player is going to be very weak
-        // so maybe a health potion or two
+        System.out.println("You made it across the river safely.");
+
+        System.out.println("A friendly wizard appears and gives you 3 health potions.");
+        game.pCharacter.setHealthPotions(game.pCharacter.getHealthPotions() + 3);
+
+        System.out.println("You now have " + game.pCharacter.getHealthPotions() + " potion(s).");
     }
 
     public static void location310() {
