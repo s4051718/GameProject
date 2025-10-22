@@ -103,6 +103,6 @@ public class gameCharacters {
     }
 
     public String toString(){
-        return String.format("---Character Information---\nName: %s\nType: %s\nHealth: %d\nLevel: %d" ,this.name,this.charType,this.health,this.level);
+        return String.format("--- Character Information ---\nName: %s\nType: %s\nHealth: %d\nLevel: %d\n-----------------------------" ,this.name,this.charType,this.health,this.level);
     }
 }    
