@@ -1,4 +1,5 @@
 package characters;
+
 public class gameCharacters {
 
     private String name;
@@ -7,10 +8,11 @@ public class gameCharacters {
     private int level;
     private String weapon;
     private int weaponDamage;
-    private int coins; 
+    private int coins;
     private int healthPotions;
 
-    public gameCharacters(String name, String charType, int health, int level, String weapon, int weaponDamage, int coins, int healthPotions) {
+    public gameCharacters(String name, String charType, int health, int level, String weapon, int weaponDamage,
+            int coins, int healthPotions) {
         this.name = name;
         this.charType = charType;
         this.health = health;
@@ -68,23 +70,18 @@ public class gameCharacters {
     public void setWeaponDamage() {
         if (this.weapon.equals("Rusty Sword")) {
             this.weaponDamage = 1;
-        }
-        else if (this.weapon.equals("X Sword")) {
+        } else if (this.weapon.equals("X Sword")) {
             this.weaponDamage = 5;
-        }
-        else if (this.weapon.equals("Short Staff")) {
+        } else if (this.weapon.equals("Short Staff")) {
             this.weaponDamage = 1;
-        }        
-        else if (this.weapon.equals("X Staff")) {
+        } else if (this.weapon.equals("X Staff")) {
             this.weaponDamage = 5;
-        }        
-        else if (this.weapon.equals("Dull Dagger")) {
+        } else if (this.weapon.equals("Dull Dagger")) {
             this.weaponDamage = 1;
-        }         
-        else if (this.weapon.equals("X Dagger")) {
+        } else if (this.weapon.equals("X Dagger")) {
             this.weaponDamage = 5;
-        }              
-    }    
+        }
+    }
 
     public int getCoins() {
         return coins;
@@ -92,7 +89,7 @@ public class gameCharacters {
 
     public void setCoins(int coins) {
         this.coins = coins;
-    }    
+    }
 
     public int getHealthPotions() {
         return healthPotions;
@@ -102,7 +99,9 @@ public class gameCharacters {
         this.healthPotions = healthPotions;
     }
 
-    public String toString(){
-        return String.format("--- Character Information ---\nName: %s\nType: %s\nHealth: %d\nLevel: %d\n-----------------------------" ,this.name,this.charType,this.health,this.level);
+    public String toString() {
+        return String.format(
+                "--- Character Information ---\nName: %s\nType: %s\nHealth: %d\nLevel: %d\n-----------------------------",
+                this.name, this.charType, this.health, this.level);
     }
-}    
+}
