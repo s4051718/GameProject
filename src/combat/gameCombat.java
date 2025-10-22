@@ -30,23 +30,24 @@ public class gameCombat {
                 case 1:
                     System.out.printf("\nYou attempt to hit %s\n", enemy.getName());
                     if (player.getLevel() == 1) {
-                        playerAttackRoll = diceRoll.nextInt(3) + game.pCharacter.getWeaponDamage();                        
+                        playerAttackRoll = diceRoll.nextInt(3) + player.getWeaponDamage();                        
                     }
                     else if (player.getLevel() == 2) {
-                        playerAttackRoll = diceRoll.nextInt(4) + game.pCharacter.getWeaponDamage();                        
+                        playerAttackRoll = diceRoll.nextInt(4) + player.getWeaponDamage();                        
                     }        
                     else if (player.getLevel() == 3) {
-                        playerAttackRoll = diceRoll.nextInt(5) + game.pCharacter.getWeaponDamage();                        
+                        playerAttackRoll = diceRoll.nextInt(5) + player.getWeaponDamage();                        
                     }                                     
                     else if (player.getLevel() == 4) {
-                        playerAttackRoll = diceRoll.nextInt(6) + game.pCharacter.getWeaponDamage(); 
+                        playerAttackRoll = diceRoll.nextInt(6) + player.getWeaponDamage(); 
                     }                      
                     else if (player.getLevel() == 5) {
-                        playerAttackRoll = diceRoll.nextInt(7) + game.pCharacter.getWeaponDamage();      
+                        playerAttackRoll = diceRoll.nextInt(7) + player.getWeaponDamage();      
                     }                                   
                     if (playerAttackRoll <= 0) {
                         System.out.printf("\nYou failed to hit %s\n", enemy.getName());
-                    } else {
+                    } 
+                    else {
                         System.out.printf("\nYou hit %s for %d\n", enemy.getName(), playerAttackRoll);
                         tempEnemyHealth = enemy.getHealth() - playerAttackRoll;
                         enemy.setHealth(tempEnemyHealth);
@@ -85,8 +86,9 @@ public class gameCombat {
                     if (flee) {
                         System.out.println("You flee the battle");
                         fightOn = false;
-                        game.gameRunning = false;
-                    } else {
+                        game.gameRunning = true;
+                    } 
+                    else {
                         System.out.println("You failed to flee...");
                         System.out.printf("\nThe %s attempts to hit you\n", enemy.getName());
                         enemyAttackRoll = diceRoll.nextInt(6);
@@ -113,13 +115,13 @@ public class gameCombat {
             if (player.getHealth() <= 0){
                 fightOn = false;
                 game.gameRunning = false;
-                System.out.printf("\nYou died\nGame Over...");
+                System.out.printf("\nYou died");
                 break;
             }
             if (enemy.getHealth() <= 0){
                 fightOn = false;
                 fightWon = true;
-                System.out.printf("\nYou won\nWell Done...");
+                System.out.printf("\nYou won! Well Done!");              
                 break;
             }
         }
