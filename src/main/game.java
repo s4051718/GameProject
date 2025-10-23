@@ -9,7 +9,7 @@ public class game {
     private static Scanner scanner = new Scanner(System.in);
     public static boolean gameRunning = true;
 
-    public static gameCharacters pCharacter = new gameCharacters(null, null, 10, 1, null, 0, 0, 0);
+    public static gameCharacters pCharacter = new gameCharacters(null, null, 20, 20, 0, 0, null, 0, 0, 0);
 
     public static void main(String[] args) {
         System.out.println("Welcome to the World of X\n");
