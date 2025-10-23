@@ -268,14 +268,11 @@ public class gameNavigation {
                 goToLocation(currentLocation);
             } else {
                 System.out.println("Wrong! The river surges and you take damage.");
-                game.pCharacter.setHealth(game.pCharacter.getHealth() - 5);
-                System.out.println("You lose 5 health. Remaining health: " + game.pCharacter.getHealth());
+                game.pCharacter.setCurrentHealth(game.pCharacter.getCurrentHealth() - 5);
+                System.out.println("You lose 5 health. Remaining health: " + game.pCharacter.getCurrentHealth());
                 System.out.println("You are swept back to the previous area.");
                 currentLocation = tempLocation; // sends them back
             }
-
-
-
     }
 
     public static void location210() {
@@ -412,7 +409,7 @@ public class gameNavigation {
         System.out.println("You are on the far bank of the river, the path continues north.");
         System.out.println("You made it across the river safely.");
 
-        System.out.println("A friendly wizard appears and gives you 3 health potions.");
+        System.out.println("A friendly water sprite appears and gives you 3 health potions.");
         game.pCharacter.setHealthPotions(game.pCharacter.getHealthPotions() + 3);
 
         System.out.println("You now have " + game.pCharacter.getHealthPotions() + " potion(s).");
