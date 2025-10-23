@@ -4,18 +4,22 @@ public class gameCharacters {
 
     private String name;
     private String charType;
-    private int health;
+    private int baseHealth;
+    private int currentHealth;
+    private double exp;
     private int level;
     private String weapon;
     private int weaponDamage;
     private int coins;
     private int healthPotions;
 
-    public gameCharacters(String name, String charType, int health, int level, String weapon, int weaponDamage,
+    public gameCharacters(String name, String charType, int baseHealth, int currentHealth, double exp, int level, String weapon, int weaponDamage,
             int coins, int healthPotions) {
         this.name = name;
         this.charType = charType;
-        this.health = health;
+        this.baseHealth = baseHealth;
+        this.currentHealth = currentHealth;
+        this.exp = exp;
         this.level = level;
         this.weapon = weapon;
         this.weaponDamage = weaponDamage;
@@ -39,13 +43,29 @@ public class gameCharacters {
         this.charType = charType;
     }
 
-    public int getHealth() {
-        return health;
+    public int getBaseHealth() {
+        return baseHealth;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void setBaseHealth(int baseHealth) {
+        this.baseHealth = baseHealth;
     }
+
+    public int getCurrentHealth() {
+        return currentHealth;
+    }
+
+    public void setCurrentHealth(int currentHealth) {
+        this.currentHealth = currentHealth;
+    }
+
+    public double getExp() {
+        return exp;
+    }
+
+    public void setExp(double exp) {
+        this.exp = exp;
+    }    
 
     public int getLevel() {
         return level;
@@ -101,7 +121,7 @@ public class gameCharacters {
 
     public String toString() {
         return String.format(
-                "--- Character Information ---\nName: %s\nType: %s\nHealth: %d\nLevel: %d\n-----------------------------",
-                this.name, this.charType, this.health, this.level);
+                "\n--- Character Information ---\nName: %s\nType: %s\nHealth: %d\\%d\nLevel: %d\n-----------------------------",
+                this.name, this.charType, this.currentHealth, this.baseHealth, this.level);
     }
 }
