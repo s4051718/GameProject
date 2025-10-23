@@ -252,8 +252,30 @@ public class gameNavigation {
     }
 
     public static void location150() {
-        System.out.println("A wide, fast-flowing river blocks your path.");
-        // Guessing game
+            System.out.println("A wide, fast-flowing river blocks your path.");
+            System.out.println("Suddenly, a mysterious voice echoes from the water.");
+            System.out.println("Traveler, to cross this river safely, you must prove your worth.");
+            System.out.println("Guess my number between 1 and 10. Be wrong, and the river will take some of your strength.");
+
+            int correctNumber = diceRoll.nextInt(10) + 1;
+            System.out.print("Enter your guess: ");
+            int guess = scanner.nextInt();
+            scanner.nextLine();
+
+            if (guess == correctNumber) {
+                System.out.println("You guessed correctly! The river parts and you cross safely.");
+                currentLocation = 250; // crosses the river successfully
+                goToLocation(currentLocation);
+            } else {
+                System.out.println("Wrong! The river surges and you take damage.");
+                game.pCharacter.setHealth(game.pCharacter.getHealth() - 5);
+                System.out.println("You lose 5 health. Remaining health: " + game.pCharacter.getHealth());
+                System.out.println("You are swept back to the previous area.");
+                currentLocation = tempLocation; // sends them back
+            }
+
+
+
     }
 
     public static void location210() {
@@ -388,8 +410,12 @@ public class gameNavigation {
 
     public static void location250() {
         System.out.println("You are on the far bank of the river, the path continues north.");
-        // Reward for guessing game, at this stage the player is going to be very weak
-        // so maybe a health potion or two
+        System.out.println("You made it across the river safely.");
+
+        System.out.println("A friendly wizard appears and gives you 3 health potions.");
+        game.pCharacter.setHealthPotions(game.pCharacter.getHealthPotions() + 3);
+
+        System.out.println("You now have " + game.pCharacter.getHealthPotions() + " potion(s).");
     }
 
     public static void location310() {
