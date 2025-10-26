@@ -23,7 +23,7 @@ public class gameCombat {
             System.out.println("\nWhat would you like to do?: ");
             System.out.println("1. Fight\n2. Run ");
             if (player.getHealthPotions() > 0) {
-                System.out.println("3. Use Potions");
+                System.out.println("3. Use Potion");
             }
             int choice = scanner.nextInt();
             switch (choice) {
@@ -98,6 +98,28 @@ public class gameCombat {
                     player.setHealthPotions(player.getHealthPotions() - 1);
                     System.out.println("You use a health potion and restore 10 health!");
                     System.out.println("Your health is now: " + player.getCurrentHealth());
+                    System.out.printf("\nThe %s attempts to hit you\n", enemy.getName());
+                    if (enemy.getCurrentHealth() > 0) {
+                        System.out.printf("\nThe %s attempts to hit you\n", enemy.getName());
+                        if (enemy.getLevel() == 1) {
+                            enemyAttackRoll = diceRoll.nextInt(2);
+                        } else if (enemy.getLevel() == 2) {
+                            enemyAttackRoll = diceRoll.nextInt(3);
+                        } else if (enemy.getLevel() == 3) {
+                            enemyAttackRoll = diceRoll.nextInt(4);
+                        } else if (enemy.getLevel() == 4) {
+                            enemyAttackRoll = diceRoll.nextInt(5);
+                        } else if (enemy.getLevel() == 5) {
+                            enemyAttackRoll = diceRoll.nextInt(5);
+                        }
+                        if (enemyAttackRoll <= 0) {
+                            System.out.printf("\nThe %s failed to hit you\n", enemy.getName());
+                        } else {
+                            System.out.printf("\nThe %s hit you for %d\n", enemy.getName(), enemyAttackRoll);
+                            tempPlayerHealth = player.getCurrentHealth() - enemyAttackRoll;
+                            player.setCurrentHealth(tempPlayerHealth);
+                        }     
+                    }               
                     break;
                 default:
                     System.out.println("Not a valid choice");
@@ -168,5 +190,10 @@ public class gameCombat {
         } else {
             System.out.printf("You have %.1f experience!", player.getExp());
         }
+    }
+
+    public static void lootEnemy(gameCharacters player, gameCharacters enemy) {
+        player.setCoins(player.getCoins() + enemy.getCoins());
+        player.setHealthPotions(player.getHealthPotions() + enemy.getHealthPotions());     
     }
 }
