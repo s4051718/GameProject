@@ -17,7 +17,7 @@ public class gameNavigation {
     private static boolean location120EnemyDefeated = false;
     private static boolean location130EnemyDefeated = false;
     private static boolean location140EnemyDefeated = false;
-    private static boolean location150EGameCompleted = false;
+    private static boolean location150GameCompleted = false;
     private static boolean location210EnemyDefeated = false;
     private static boolean location220EnemyDefeated = false;
     private static boolean location230EnemyDefeated = false;
@@ -161,26 +161,28 @@ public class gameNavigation {
             do {
                 int enemyType = diceRoll.nextInt(6);
                 if (enemyType % 2 == 0) {
-                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears!\n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location120EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
                 } else {
-                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears! \n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location120EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -199,26 +201,28 @@ public class gameNavigation {
             do {
                 int enemyType = diceRoll.nextInt(6);
                 if (enemyType % 2 == 0) {
-                gameCharacters enemy = new gameCharacters("Dryad", "Monster", 10, 10, 10, 2, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Dryad", "Monster", 10, 10, 10, 2, null, 0, 10, 0);
                     System.out.printf("A %s appears!\n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location130EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
                 } else {
-                gameCharacters enemy = new gameCharacters("Blight", "Monster", 10, 10, 10, 2, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Blight", "Monster", 10, 10, 10, 2, null, 0, 10, 0);
                     System.out.printf("A %s appears! \n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location130EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -235,7 +239,7 @@ public class gameNavigation {
         if (location140EnemyDefeated == false) {           
             System.out.println("You sense danger!");
             do {
-                gameCharacters enemy = new gameCharacters("Treant", "Monster", 15, 15, 15, 2, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Treant", "Monster", 15, 15, 15, 2, null, 0, 15, 0);
                 System.out.printf("A %s appears! \n", enemy.getName()); 
                 System.out.println(enemy);
                 gameCombat.combatMethod(game.pCharacter, enemy);
@@ -252,27 +256,37 @@ public class gameNavigation {
     }
 
     public static void location150() {
-            System.out.println("A wide, fast-flowing river blocks your path.");
-            System.out.println("Suddenly, a mysterious voice echoes from the water.");
-            System.out.println("Traveler, to cross this river safely, you must prove your worth.");
-            System.out.println("Guess my number between 1 and 10. Be wrong, and the river will take some of your strength.");
-
-            int correctNumber = diceRoll.nextInt(10) + 1;
-            System.out.print("Enter your guess: ");
-            int guess = scanner.nextInt();
-            scanner.nextLine();
-
-            if (guess == correctNumber) {
-                System.out.println("You guessed correctly! The river parts and you cross safely.");
-                currentLocation = 250; // crosses the river successfully
-                goToLocation(currentLocation);
-            } else {
-                System.out.println("Wrong! The river surges and you take damage.");
-                game.pCharacter.setCurrentHealth(game.pCharacter.getCurrentHealth() - 5);
-                System.out.println("You lose 5 health. Remaining health: " + game.pCharacter.getCurrentHealth());
-                System.out.println("You are swept back to the previous area.");
-                currentLocation = tempLocation; // sends them back
-            }
+            
+        if (location150GameCompleted == false) {
+                System.out.println("A wide, fast-flowing river blocks your path.");
+                System.out.println("Suddenly, a mysterious voice echoes from the water.");
+                System.out.println("A Naiad rises from the river and speaks:");
+                System.out.println("Traveler, to cross this river safely, you must play my game.");
+                System.out.println("Guess my number between 1 and 10. Be wrong, and you will join me in the water. Be right and you have safe passage across the river."); 
+                int correctNumber = diceRoll.nextInt(10) + 1;                             
+            do {
+                System.out.print("\nEnter your guess: ");
+                int guess = scanner.nextInt();
+                scanner.nextLine();                
+                if (guess < correctNumber) {
+                    System.out.println("Your guess is too low!");
+                    game.pCharacter.setCurrentHealth(game.pCharacter.getCurrentHealth() - 1);
+                    System.out.printf("You now have: %d/%d health", game.pCharacter.getCurrentHealth(), game.pCharacter.getBaseHealth());
+                } else if (guess > correctNumber) {
+                    System.out.println("Your guess is too high!");
+                    game.pCharacter.setCurrentHealth(game.pCharacter.getCurrentHealth() - 1);    
+                    System.out.printf("You now have: %d/%d health", game.pCharacter.getCurrentHealth(), game.pCharacter.getBaseHealth());                                
+                } else {
+                    System.out.println("You guessed correctly! The river parts and you cross safely.");
+                    location150GameCompleted = true;
+                    currentLocation = 250;
+                    goToLocation(currentLocation);
+                }
+            } while (location150GameCompleted == false);
+            location150GameCompleted = true;        
+        } else {
+            System.out.println("The Naiad gives you safe passage through the river.");
+        }
     }
 
     public static void location210() {
@@ -283,26 +297,28 @@ public class gameNavigation {
             do {
                 int enemyType = diceRoll.nextInt(6);
                 if (enemyType % 2 == 0) {
-                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears!\n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location210EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
                 } else {
-                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears! \n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location210EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -321,26 +337,28 @@ public class gameNavigation {
             do {
                 int enemyType = diceRoll.nextInt(6);
                 if (enemyType % 2 == 0) {
-                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Bandit", "Human", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears!\n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location220EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
                 } else {
-                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Wolf", "Monster", 10, 10, 5, 1, null, 0, 5, 0);
                     System.out.printf("A %s appears! \n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location220EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -359,26 +377,28 @@ public class gameNavigation {
             do {
                 int enemyType = diceRoll.nextInt(6);
                 if (enemyType % 2 == 0) {
-                gameCharacters enemy = new gameCharacters("Dryad", "Monster", 10, 10, 10, 2, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Dryad", "Monster", 10, 10, 10, 2, null, 0, 10, 0);
                     System.out.printf("A %s appears!\n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location230EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
                 } else {
-                gameCharacters enemy = new gameCharacters("Blight", "Monster", 10, 10, 10, 1, null, 0, 0, 0);
+                gameCharacters enemy = new gameCharacters("Blight", "Monster", 10, 10, 10, 1, null, 0, 10, 0);
                     System.out.printf("A %s appears! \n", enemy.getName());
                     System.out.println(enemy);
                     gameCombat.combatMethod(game.pCharacter, enemy);
                     if (enemy.getCurrentHealth() <= 0) {
                         location230EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -406,12 +426,11 @@ public class gameNavigation {
     }
 
     public static void location250() {
-        System.out.println("You are on the far bank of the river, the path continues north.");
-        System.out.println("You made it across the river safely.");
+        System.out.println("You made it across the river safely.\nYou are on the far bank and the path continues north.");
 
-        System.out.println("A friendly water sprite appears and gives you 3 health potions.");
+        System.out.println("\nBefore you continue north The Naiad appears and gives you 3 health potions.");
+        System.out.println("Good luck on your journey");
         game.pCharacter.setHealthPotions(game.pCharacter.getHealthPotions() + 3);
-
         System.out.println("You now have " + game.pCharacter.getHealthPotions() + " potion(s).");
     }
 
@@ -453,12 +472,12 @@ public class gameNavigation {
         if (location350EnemyDefeated == false) {
             System.out.println("You sense danger!");
             do {
-                gameCharacters ogre = new gameCharacters("Shreik", "Monster", 25, 25, 5, 3, null, 0, 0, 0);
+                gameCharacters ogre = new gameCharacters("Shreik", "Monster", 25, 25, 20, 3, null, 0, 20, 0);
                 System.out.printf("A %s appears! \n", ogre.getName());
                 System.out.println(ogre);
                 gameCombat.combatMethod(game.pCharacter, ogre);
                 System.out.println("Oh my god you killed my ogre! Now face the wrath of the donkey!");
-                gameCharacters donkey = new gameCharacters("Eddie", "Monster", 20, 20, 5, 2, null, 0, 0, 0);
+                gameCharacters donkey = new gameCharacters("Eddie", "Monster", 20, 20, 15, 2, null, 0, 25, 0);
                 System.out.println("An angry donkey appears! \n");
                 System.out.println(donkey);
                 gameCombat.combatMethod(game.pCharacter, donkey);
@@ -525,7 +544,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location430EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
@@ -537,7 +557,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location430EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -576,7 +597,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location440EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
@@ -588,7 +610,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location440EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -623,7 +646,6 @@ public class gameNavigation {
 
     public static void location520() {
         System.out.println("You are navigating a treacherous, windy Mountain Pass.");
-        // Mountain Pass mini-boss
         if (location520EnemyDefeated == false) {
             System.out.println("You sense danger!");
             do {
@@ -666,7 +688,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location530EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
@@ -678,7 +701,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location530EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
@@ -710,7 +734,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location540EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");
-                        gameCombat.levelUp(game.pCharacter, enemy);                           
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                         
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
 
                     }
@@ -722,7 +747,8 @@ public class gameNavigation {
                     if (enemy.getCurrentHealth() <= 0) {
                         location540EnemyDefeated = true;
                         System.out.println("\nThe enemy has been defeated");   
-                        gameCombat.levelUp(game.pCharacter, enemy);                                              
+                        gameCombat.levelUp(game.pCharacter, enemy);  
+                        gameCombat.lootEnemy(game.pCharacter, enemy);                                            
                         System.out.printf("\nYou have %d\\%d health remaining\n",  game.pCharacter.getCurrentHealth(),game.pCharacter.getBaseHealth());
                     }
                 }
