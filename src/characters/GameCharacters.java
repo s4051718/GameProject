@@ -1,6 +1,6 @@
 package characters;
 
-public class gameCharacters {
+public class GameCharacters {
 
     private String name;
     private String charType;
@@ -10,11 +10,10 @@ public class gameCharacters {
     private int level;
     private String weapon;
     private int weaponDamage;
-    private int coins;
-    private int healthPotions;
+    private double coins;
 
-    public gameCharacters(String name, String charType, int baseHealth, int currentHealth, double exp, int level, String weapon, int weaponDamage,
-            int coins, int healthPotions) {
+    public GameCharacters(String name, String charType, int baseHealth, int currentHealth, double exp, int level, String weapon, int weaponDamage,
+            double coins) {
         this.name = name;
         this.charType = charType;
         this.baseHealth = baseHealth;
@@ -24,7 +23,6 @@ public class gameCharacters {
         this.weapon = weapon;
         this.weaponDamage = weaponDamage;
         this.coins = coins;
-        this.healthPotions = healthPotions;
     }
 
     public String getName() {
@@ -90,33 +88,25 @@ public class gameCharacters {
     public void setWeaponDamage() {
         if (this.weapon.equals("Rusty Sword")) {
             this.weaponDamage = 1;
-        } else if (this.weapon.equals("X Sword")) {
+        } else if (this.weapon.equals("Chaos Blade")) {
             this.weaponDamage = 5;
         } else if (this.weapon.equals("Short Staff")) {
             this.weaponDamage = 1;
-        } else if (this.weapon.equals("X Staff")) {
+        } else if (this.weapon.equals("Great White Staff")) {
             this.weaponDamage = 5;
         } else if (this.weapon.equals("Dull Dagger")) {
             this.weaponDamage = 1;
-        } else if (this.weapon.equals("X Dagger")) {
+        } else if (this.weapon.equals("Diamond Dagger")) {
             this.weaponDamage = 5;
         }
     }
 
-    public int getCoins() {
+    public double getCoins() {
         return coins;
     }
 
-    public void setCoins(int coins) {
+    public void setCoins(double coins) {
         this.coins = coins;
-    }
-
-    public int getHealthPotions() {
-        return healthPotions;
-    }
-
-    public void setHealthPotions(int healthPotions) {
-        this.healthPotions = healthPotions;
     }
 
     public String toString() {
