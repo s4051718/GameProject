@@ -21,7 +21,7 @@ public class gameCombat {
 
         while (fightOn) {
             System.out.println("\nWhat would you like to do?: ");
-            System.out.println("1. Fight\n2. Run ");
+            System.out.println("1. Fight(type 1)\n2. Run(type 2) ");
             if (player.getHealthPotions() > 0) {
                 System.out.println("3. Use Potion");
             }
