@@ -58,6 +58,7 @@ public class gameNavigation {
             case "Q":
                 System.out.println("You have chosen to quit the game, goodbye!");
                 game.gameRunning = false;
+                break;
             default:
                 System.out.println("Invalid direction! Please enter N/n, S/s, E/e or W/w");
                 return;
